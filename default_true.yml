@@ -5,8 +5,13 @@
   vars:
           null_value: null
   tasks:
-          - debug:
-                  msg: var is {{null_value | default('Variable was_false',True)}}
+          - name: default with true. Works with default with a defined variable who's value is null or empyt string or evaluated to false 
+            debug:
+                  msg: var is {{null_value | default('Variable was_false, so I was printed',True)}}
+          
+          - name: default with an undefined variable
+            debug:
+                  msg: "{{newvar  | default('Variable never was defined, so I am default value')}}"
 
                   #Default without true only works when:
                   #        1. Variable is NOT DEFINED. NOT EVEN NULL. NOT DEFINED. NEVER WRITTEN AT ANY PLACE IN PLAYBOOKS / INCLUDED ROLES.
