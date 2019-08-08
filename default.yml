@@ -1,0 +1,13 @@
+- name: testing
+  hosts: localhost
+  vars:
+    adduser:
+      - username: harry
+        group: redhat
+      - username: ron
+  tasks:
+          - name: add user
+            user:
+              name: "{{item.username}}"
+              groups: "{{item.group | default(omit)}}"
+            loop: "{{adduser}}"
