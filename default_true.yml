@@ -1,0 +1,17 @@
+---
+
+- name: variable value define
+  hosts: localhost
+  vars:
+          null_value: null
+  tasks:
+          - debug:
+                  msg: var is {{null_value | default('Variable was_false',True)}}
+
+                  #Default without true only works when:
+                  #        1. Variable is NOT DEFINED. NOT EVEN NULL. NOT DEFINED. NEVER WRITTEN AT ANY PLACE IN PLAYBOOKS / INCLUDED ROLES.
+
+                  #True with default is only used when:
+                  #        1. variable is defined but has a null value 
+                  #        2. variable having empty string
+                  #        3. variable evaluates to FALSE
